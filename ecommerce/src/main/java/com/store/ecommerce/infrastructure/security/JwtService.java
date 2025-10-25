@@ -23,7 +23,6 @@ public class JwtService {
     private long expirationMinutes;
 
     private Key getSigningKey() {
-        // La clave debe tener mínimo 32 bytes
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 

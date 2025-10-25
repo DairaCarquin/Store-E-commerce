@@ -1,0 +1,14 @@
+<div class="carousel" *ngIf="banners.length">
+  <button class="nav left" (click)="prev()">‹</button>
+
+  <div class="slide" *ngFor="let b of banners; let i = index" [class.active]="i === index">
+    <img [src]="b.imageBase64 | base64Image" alt="{{ b.title }}" />
+    <div class="overlay">
+      <h2>{{ b.title }}</h2>
+      <p>{{ b.description }}</p>
+      <button [routerLink]="b.buttonLink">{{ b.buttonText }}</button>
+    </div>
+  </div>
+
+  <button class="nav right" (click)="next()">›</button>
+</div>

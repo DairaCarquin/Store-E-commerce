@@ -1,0 +1,58 @@
+<footer class="footer">
+  <!-- Top Section -->
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img *ngIf="logo" [src]="logo.image | base64Image" alt="Logo" class="logo" />
+      <p>Hacer feliz a tu niño interior es nuestra prioridad.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram">
+          <mat-icon>instagram</mat-icon>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <mat-icon>facebook</mat-icon>
+        </a>
+        <a href="#" aria-label="call">
+          <mat-icon>call</mat-icon>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h4>Cuenta</h4>
+        <a href="#">Mi cuenta</a>
+        <a href="#">Historial de pedidos</a>
+        <a href="#">Membresía</a>
+        <a href="#">Configuración</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Asistencia</h4>
+        <a href="#">Centro de ayuda</a>
+        <a href="#">Política de devoluciones</a>
+        <a href="#">Términos y condiciones</a>
+        <a href="#">Política de privacidad</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Nosotros</h4>
+        <a href="#">Quiénes somos</a>
+        <a href="#">Blog</a>
+        <a href="#">Sucursales</a>
+        <a href="#">Carreras</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contáctanos</h4>
+        <a href="#">Atención al cliente</a>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <p>© {{ currentYear }} Daira Carquin — Todos los derechos reservados.</p>
+  </div>
+</footer>

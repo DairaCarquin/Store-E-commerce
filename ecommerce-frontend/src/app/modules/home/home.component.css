@@ -1,0 +1,269 @@
+section {
+  padding: 40px 60px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+section h2 {
+  color: #78418f;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  text-align: left;
+  max-width: 1270px;
+  margin-inline: auto;
+}
+
+.subscription {
+  position: relative;
+  background-image: url('../../../assets/home/subscription.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 100px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #fff;
+}
+
+.subscription::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.subscription-box {
+  position: relative;
+  text-align: left;
+  display: block;
+  max-width: 1330px;
+  margin: 0 10%;
+}
+
+.subscription-box h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.subscription-box p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.subscription-box button {
+  background: #78418f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 13px 40px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: background 0.2s ease;
+}
+
+.subscription-box button:hover {
+  background: #007bbd;
+}
+
+.monthly-grid,
+.viewed-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 1330px;
+  margin: 0 auto;
+}
+
+app-product-carousel {
+  display: block;
+  max-width: 1330px;
+  margin: 0 auto;
+}
+
+.benefits {
+  /* 🎨 Fondo con degradado moderno */
+  background: linear-gradient(135deg, #007bbd, #8b6ad9, #ff7f50);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 50px 20px;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 0;
+}
+
+/* Animación sutil del degradado */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Cada bloque de beneficio */
+.benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Íconos Material */
+.benefit mat-icon {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* Texto del beneficio */
+.benefit span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .benefit {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .benefit {
+    width: 100%;
+  }
+}
+
+/* ===== SECCIÓN NEWSLETTER ===== */
+.newsletter {
+  position: relative;
+  background: url('../../../assets/home/newsletter.jpg') center/cover no-repeat;
+  padding: 100px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.newsletter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 68%);
+  z-index: 0;
+}
+
+.newsletter-overlay {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.newsletter h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== INPUT Y BOTÓN ===== */
+.input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input-row input {
+  flex: 1;
+  min-width: 260px;
+  max-width: 400px;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+  color: #333;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.input-row input:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 2px #fff, 0 0 8px rgba(0, 123, 189, 0.7);
+}
+
+/* ===== BOTÓN ===== */
+.input-row button {
+  background: linear-gradient(90deg, #009fe3, #8b6ad9);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-row button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .newsletter {
+    padding: 80px 15px;
+  }
+
+  .newsletter h3 {
+    font-size: 1.4rem;
+  }
+
+  .input-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .input-row input,
+  .input-row button {
+    width: 100%;
+  }
+}

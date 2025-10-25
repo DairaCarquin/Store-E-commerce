@@ -1,5 +1,7 @@
 package com.store.ecommerce.core.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,13 +30,17 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
 
+    public Product save(Product product) {
+        return productRepo.save(product);
+    }
+
     public Product create(ProductRequest req) {
         Product p = new Product();
         p.setName(req.name());
         p.setDescription(req.description());
-        p.setPrice(java.math.BigDecimal.valueOf(req.price()));
+        p.setPrice(BigDecimal.valueOf(req.price()));
         p.setStock(req.stock());
-        p.setImageUrl(req.imageUrl());
+        p.setImageBase64(req.imageBase64());
         p.setActive(req.active() != null ? req.active() : true);
 
         if (req.categoryId() != null) {
@@ -42,6 +48,7 @@ public class ProductService {
                     .orElseThrow(() -> new RuntimeException("Categoría no válida"));
             p.setCategory(category);
         }
+
         return productRepo.save(p);
     }
 
@@ -49,19 +56,32 @@ public class ProductService {
         Product p = get(id);
         p.setName(req.name());
         p.setDescription(req.description());
-        p.setPrice(java.math.BigDecimal.valueOf(req.price()));
+        p.setPrice(BigDecimal.valueOf(req.price()));
         p.setStock(req.stock());
-        p.setImageUrl(req.imageUrl());
-        p.setActive(req.active());
+        p.setImageBase64(req.imageBase64());
+        p.setActive(req.active() != null ? req.active() : true);
+
         if (req.categoryId() != null) {
             Category c = categoryRepo.findById(req.categoryId())
                     .orElseThrow(() -> new RuntimeException("Categoría inválida"));
             p.setCategory(c);
         }
+
         return productRepo.save(p);
     }
 
     public void delete(Long id) {
+        if (!productRepo.existsById(id)) {
+            throw new RuntimeException("Producto no encontrado");
+        }
         productRepo.deleteById(id);
     }
+
+    public Page<Product> listByCategory(Long categoryId, Pageable pageable) {
+        if (!categoryRepo.existsById(categoryId)) {
+            throw new RuntimeException("Categoría no encontrada");
+        }
+        return productRepo.findByCategoryIdAndActiveTrue(categoryId, pageable);
+    }
+
 }

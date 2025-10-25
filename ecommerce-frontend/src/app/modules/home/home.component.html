@@ -1,1 +1,73 @@
-<p>home works!</p>
+<app-header></app-header>
+
+<app-carousel [banners]="banners"></app-carousel>
+
+<section class="offers">
+    <h2>¡Aprovecha la promoción!</h2>
+    <app-product-carousel [products]="promoProducts" [itemsPerView]="5"></app-product-carousel>
+</section>
+
+<section class="monthly">
+    <h2>Ofertas del mes</h2>
+    <div class="monthly-grid">
+        <app-product-card *ngFor="let p of monthlyOffers" [product]="p">
+        </app-product-card>
+    </div>
+</section>
+
+<section *ngFor="let cat of categoriesWithProducts" class="category-section">
+    <h2>{{ cat.name }}</h2>
+
+    <app-product-carousel [products]="cat.products" [itemsPerView]="5"></app-product-carousel>
+</section>
+
+
+<section class="subscription">
+    <div class="subscription-box">
+        <h2>SUSCRÍBETE A NUESTRO <br>BOLETÍN EXCLUSIVO</h2>
+        <p>¡Así estarás al tanto de las novedades del mundo Funkos!</p>
+        <button>Suscribirse</button>
+    </div>
+</section>
+
+<section class="viewed">
+    <h2>Productos vistos</h2>
+    <div class="viewed-grid">
+        <app-product-card *ngFor="let p of viewedProducts" [product]="p">
+        </app-product-card>
+    </div>
+</section>
+
+<section class="benefits">
+    <div class="benefit">
+        <mat-icon>attach_money</mat-icon>
+        <span>Mejores precios</span>
+    </div>
+
+    <div class="benefit">
+        <mat-icon>local_shipping</mat-icon>
+        <span>Envío gratis desde S/65</span>
+    </div>
+
+    <div class="benefit">
+        <mat-icon>lock</mat-icon>
+        <span>Pago seguro</span>
+    </div>
+
+    <div class="benefit">
+        <mat-icon>storefront</mat-icon>
+        <span>Retiro en tienda</span>
+    </div>
+</section>
+
+<section class="newsletter">
+    <div class="newsletter-overlay">
+        <h3>Recibe promociones y novedades</h3>
+        <div class="input-row">
+            <input type="email" placeholder="Tu correo electrónico" />
+            <button>Enviar</button>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>
