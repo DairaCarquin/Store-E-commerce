@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface CartItem {
@@ -50,13 +50,14 @@ export class CartService {
         imageBase64: string
     ): Observable<Cart> {
         const body = { productId, quantity, name, price, description, imageBase64 };
-        const obs = this.http.post<Cart>(`${this.baseUrl}/${userId}/items`, body);
-        obs.subscribe(cart => {
-            this.cartSubject.next(cart);
-            this.saveLocal(cart);
-        });
-        return obs;
+        return this.http.post<Cart>(`${this.baseUrl}/${userId}/items`, body).pipe(
+            tap(cart => {
+                this.cartSubject.next(cart);
+                this.saveLocal(cart);
+            })
+        );
     }
+
 
     updateItem(userId: number, productId: number, quantity: number): void {
         const obs = this.http.put<Cart>(`${this.baseUrl}/${userId}/items/${productId}`, { quantity });

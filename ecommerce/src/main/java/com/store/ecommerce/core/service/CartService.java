@@ -14,6 +14,7 @@ import com.store.ecommerce.infrastructure.persistence.entity.CartItem;
 import com.store.ecommerce.infrastructure.persistence.entity.Coupon;
 import com.store.ecommerce.infrastructure.persistence.entity.Product;
 import com.store.ecommerce.infrastructure.persistence.entity.User;
+import com.store.ecommerce.infrastructure.repository.CartItemRepository;
 import com.store.ecommerce.infrastructure.repository.CartRepository;
 import com.store.ecommerce.infrastructure.repository.CouponRepository;
 import com.store.ecommerce.infrastructure.repository.ProductRepository;
@@ -29,6 +30,7 @@ public class CartService {
     private final ProductRepository productRepo;
     private final CouponRepository couponRepo;
     private final UserRepository userRepo;
+    private final CartItemRepository cartItemRepository;
 
     private final ConcurrentHashMap<Long, Object> userLocks = new ConcurrentHashMap<>();
 
@@ -74,12 +76,12 @@ public class CartService {
         if (product.getStock() < qty)
             throw new RuntimeException("Stock insuficiente");
 
-        Optional<CartItem> existing = cart.getItems().stream()
-                .filter(ci -> ci.getProduct().getId().equals(productId))
-                .findFirst();
+        Optional<CartItem> existing = cartItemRepository.findByCartIdAndProductId(cart.getId(), productId);
 
         if (existing.isPresent()) {
-            existing.get().setQuantity(existing.get().getQuantity() + qty);
+            CartItem ci = existing.get();
+            ci.setQuantity(ci.getQuantity() + qty);
+            cartItemRepository.save(ci);
         } else {
             CartItem ci = new CartItem();
             ci.setCart(cart);
@@ -89,6 +91,7 @@ public class CartService {
             ci.setName(name);
             ci.setDescription(description);
             ci.setImageBase64(imageBase64);
+            cartItemRepository.save(ci);
             cart.getItems().add(ci);
         }
 

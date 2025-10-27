@@ -48,7 +48,12 @@
         </ng-container>
 
         <ng-template #addBtn>
-          <button class="add-btn" (click)="addToCart(p.id)">Agregar</button>
+          <button
+            class="add-btn"
+            [disabled]="adding"
+            (click)="addToCart(p.id)">
+            {{ adding ? 'Agregando...' : 'Agregar' }}
+          </button>
         </ng-template>
       </ng-container>
 

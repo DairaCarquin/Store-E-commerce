@@ -35,12 +35,12 @@ export class CartSidebarComponent implements OnInit {
       this.cartService.getCart(this.userId).subscribe();
     }
 
-    window.addEventListener('storage', () => {
-      const userId = this.authService.getUserId();
-      if (userId) {
-        this.cartService.getCart(userId).subscribe();
-      }
-    });
+    // window.addEventListener('storage', () => {
+    //   const userId = this.authService.getUserId();
+    //   if (userId) {
+    //     this.cartService.getCart(userId).subscribe();
+    //   }
+    // });
   }
 
   toggle() {

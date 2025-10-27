@@ -25,19 +25,20 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   page = 0;
   totalPages = 1;
   pageSize = 8;
+  adding = false;
 
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
 
   constructor(
-    public authService: AuthService,      
+    public authService: AuthService,
     private categoryService: CategoryService,
     private productService: ProductService,
     private categoryState: CategoryStateService,
     private route: ActivatedRoute,
     private cartService: CartService,
     private cartVisibility: CartVisibilityService,
-    public router: Router   
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -164,6 +165,9 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   }
 
   addToCart(productId: number) {
+    if (this.adding) return;
+    this.adding = true;
+
     const product = this.products.find(p => p.id === productId);
     if (!product) return;
 
@@ -191,16 +195,14 @@ export class CategoryListComponent implements OnInit, OnDestroy {
           this.cartService['saveLocal'](cart);
           this.cartVisibility.open();
         },
-
         error: (err) => {
-          console.warn('Error al agregar producto (ignorado temporalmente):', err);
-          if (err.status !== 403 && err.status !== 0) {
-            Swal.fire('Error', 'No se pudo agregar el producto al carrito', 'error');
-          }
-        }
+          console.warn('Error al agregar producto:', err);
+          Swal.fire('Error', 'No se pudo agregar el producto al carrito', 'error');
+        },
+        complete: () => (this.adding = false) 
       });
-
   }
+
 
   increaseQty(productId: number) {
     const cart = this.cartService['cartSubject'].value;
