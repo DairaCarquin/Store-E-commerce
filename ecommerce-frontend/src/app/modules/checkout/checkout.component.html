@@ -1,0 +1,95 @@
+<div class="checkout-container">
+    <form [formGroup]="billingForm" class="billing-form">
+        <h2>DETALLES DE FACTURACIÓN</h2>
+
+        <div class="row">
+            <div>
+                <label>Nombres *</label>
+                <input formControlName="firstName" type="text" />
+            </div>
+            <div>
+                <label>Apellidos *</label>
+                <input formControlName="lastName" type="text" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label>Documento de Identidad</label>
+                <input formControlName="dni" type="text" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label>Teléfono *</label>
+                <input formControlName="phone" type="text" />
+            </div>
+            <div>
+                <label>Correo electrónico *</label>
+                <input formControlName="email" type="email" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label>Dirección *</label>
+                <input formControlName="address" type="text" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label>Región / Provincia *</label>
+                <input formControlName="region" type="text" />
+            </div>
+            <div>
+                <label>Localidad / Ciudad *</label>
+                <input formControlName="city" type="text" />
+            </div>
+        </div>
+    </form>
+
+    <div class="order-summary" *ngIf="cart">
+        <h2>TU PEDIDO</h2>
+
+        <div class="order-list">
+            <div *ngFor="let item of cart.items" class="order-item">
+                <img [src]="(item.imageBase64 ?? '') | base64Image" alt="{{ item.productName }}" />
+                <div class="details">
+                    <h1 class="name">{{ item.productName }}</h1>
+                    <p class="qty">x{{ item.quantity }}</p>
+                </div>
+                <h1 class="price">S/ {{ item.unitPrice | number: '1.2-2' }}</h1>
+            </div>
+        </div>
+
+        <div class="totals">
+            <p>Subtotal: <strong>S/ {{ cart.subtotal | number:'1.2-2' }}</strong></p>
+            <p>Descuento: <strong>S/ {{ cart.discount | number:'1.2-2' }}</strong></p>
+            <p>Total: <strong class="total">S/ {{ cart.total | number:'1.2-2' }}</strong></p>
+        </div>
+
+        <div class="payment-methods">
+            <h3>Método de pago</h3>
+            <label>
+                <input type="radio" name="payment" value="card" [(ngModel)]="paymentMethod" /> Tarjeta
+                <div class="cards">
+                    <img src="assets/checkout/visa.jpg" alt="Visa" />
+                    <img src="assets/checkout/mastercard.jpg" alt="MasterCard" />
+                    <img src="assets/checkout/amex.jpg" alt="AmEx" />
+                </div>
+            </label>
+            <label>
+                <input type="radio" name="payment" value="transfer" [(ngModel)]="paymentMethod" /> Transferencia
+                bancaria
+            </label>
+        </div>
+
+        <app-payment-modal *ngIf="showPaymentModal" (success)="onPaymentSuccess()"
+            (closeModal)="showPaymentModal = false">
+        </app-payment-modal>
+
+        <button class="place-order" (click)="placeOrder()">REALIZAR EL PEDIDO</button>
+    </div>
+</div>

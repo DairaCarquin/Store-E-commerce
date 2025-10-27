@@ -7,29 +7,35 @@
   </div>
 
   <div class="top-bar">
-    <button class="menu-btn">
-      <mat-icon style=" font-size: 20px; height: 20px; width: 20px;">menu</mat-icon>
+    <button class="menu-btn" (click)="openMenu()">
+      <mat-icon style="font-size: 20px;">menu</mat-icon>
     </button>
 
-    <img *ngIf="logo" [src]="logo.image | base64Image" alt="Logo" class="logo" />
+    <img *ngIf="logo" [src]="logo.image | base64Image" alt="Logo" class="logo" (click)="goHome()"
+      style="cursor: pointer;" />
 
     <input type="text" placeholder="¿Qué estás buscando?" />
 
     <div class="user-actions">
-      <a routerLink="/login" class="top-link">
+      <a *ngIf="!isLoggedIn" routerLink="/login" class="top-link">
         <mat-icon>person</mat-icon>
         Ingresar
       </a>
 
-      <a routerLink="/cart" class="top-link">
+      <div *ngIf="isLoggedIn" class="top-link user-menu" (click)="goToAccount()">
+        <mat-icon>account_circle</mat-icon>
+        <span>Mi cuenta</span>
+      </div>
+
+      <button class="top-link" (click)="openCart()">
         <mat-icon>shopping_cart</mat-icon>
         Carrito
-      </a>
+      </button>
     </div>
   </div>
 
   <nav class="categories">
-    <div *ngFor="let cat of categories" class="category-item">
+    <div *ngFor="let cat of categories" class="category-item" (click)="selectCategory(cat)">
       {{ cat.name }}
     </div>
   </nav>

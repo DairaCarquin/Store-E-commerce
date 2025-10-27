@@ -12,7 +12,7 @@ export class ProductCardComponent {
   constructor(private cartService: CartService) {}
 
   addToCart() {
-    this.cartService.addItem(1, this.product.id, 1).subscribe(() => {
+    this.cartService.addItem(1, this.product.id, 1, this.product.name, this.product.price, '', this.product.imageBase64).subscribe(() => {
       alert(`"${this.product.name}" agregado al carrito`);
     });
   }

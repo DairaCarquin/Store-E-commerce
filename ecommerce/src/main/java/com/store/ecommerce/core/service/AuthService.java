@@ -21,6 +21,24 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
+    public AuthResponse login(LoginRequest req) {
+        User user = userRepo.findByEmail(req.email())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        if (!passwordEncoder.matches(req.password(), user.getPassword())) {
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+
+        String token = jwtService.generateToken(user.getEmail(), user.getRole().name());
+        return new AuthResponse(
+                token,
+                user.getFullName(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getDni(),
+                user.getRole(),
+                user.getId());
+    }
+
     public AuthResponse register(RegisterRequest req) {
         if (userRepo.existsByEmail(req.email())) {
             throw new RuntimeException("El email ya está registrado");
@@ -36,17 +54,14 @@ public class AuthService {
         userRepo.save(user);
 
         String token = jwtService.generateToken(user.getEmail(), user.getRole().name());
-        return new AuthResponse(token);
+        return new AuthResponse(
+                token,
+                user.getFullName(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getDni(),
+                user.getRole(),
+                user.getId());
     }
 
-    public AuthResponse login(LoginRequest req) {
-        User user = userRepo.findByEmail(req.email())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        if (!passwordEncoder.matches(req.password(), user.getPassword())) {
-            throw new RuntimeException("Contraseña incorrecta");
-        }
-
-        String token = jwtService.generateToken(user.getEmail(), user.getRole().name());
-        return new AuthResponse(token);
-    }
 }

@@ -1,0 +1,52 @@
+<div class="menu-sidebar" [class.open]="visible">
+    <div class="menu-header">
+        <button class="close-btn" (click)="toggle()">✕</button>
+
+        <div *ngIf="isLoggedIn && user" class="user-info">
+            <mat-icon class="avatar">account_circle</mat-icon>
+            <div>
+                <h3>{{ user?.fullName }}</h3>
+                <p>{{ user?.dni || 'Sin DNI' }}</p>
+            </div>
+        </div>
+
+        <div *ngIf="!isLoggedIn && logo" class="logo-box">
+            <img [src]="logo.image | base64Image" alt="Logo" />
+        </div>
+    </div>
+
+    <nav class="menu-items">
+        <button (click)="goTo('/')">
+            <mat-icon>home</mat-icon> Home
+        </button>
+
+        <div class="category-selector">
+            <mat-icon>category</mat-icon>
+            <span>Categorías</span>
+            <select (change)="selectCategory($event)">
+                <option disabled selected>Seleccionar...</option>
+                <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+            </select>
+        </div>
+
+        <button *ngIf="isLoggedIn" (click)="goTo('/orders')">
+            <mat-icon>shopping_bag</mat-icon> Mis pedidos
+        </button>
+
+        <button *ngIf="isLoggedIn" (click)="goTo('/track-order')">
+            <mat-icon>location_searching</mat-icon> Sigue tu pedido
+        </button>
+
+        <button (click)="goTo('/stores')">
+            <mat-icon>store</mat-icon> Nuestras tiendas
+        </button>
+
+        <button (click)="goTo('/raffles')">
+            <mat-icon>emoji_events</mat-icon> Sorteos
+        </button>
+
+        <button *ngIf="isLoggedIn" class="logout" (click)="logout()">
+            <mat-icon>logout</mat-icon> Cerrar sesión
+        </button>
+    </nav>
+</div>

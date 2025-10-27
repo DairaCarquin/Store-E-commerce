@@ -1,0 +1,193 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 1999;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(164, 109, 187, 0.3);
+  padding: 35px 40px;
+  width: 380px;
+  max-width: 90%;
+  z-index: 2000;
+  animation: slideUp 0.35s ease;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.icon {
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, #a46dbb, #c493d5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 1.6s infinite;
+}
+
+h2 {
+  margin-top: 8px;
+  font-size: 1.4rem;
+  color: #8a4ba7;
+  font-weight: 700;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.close-btn:hover {
+  color: #a46dbb;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #d1c4e9;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  transition: all 0.25s ease;
+  background-color: #fdfdff;
+}
+
+input:focus {
+  border-color: #a46dbb;
+  outline: none;
+  box-shadow: 0 0 5px rgba(164, 109, 187, 0.3);
+}
+
+input.invalid {
+  border-color: #e57373;
+}
+
+.row {
+  display: flex;
+  gap: 10%;
+}
+
+.col {
+  flex: 1;
+}
+
+button {
+  width: 100%;
+  background: linear-gradient(135deg, #a46dbb, #c493d5);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(164, 109, 187, 0.3);
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.success-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  animation: fadeIn 0.5s ease;
+}
+
+.checkmark {
+  font-size: 2.5rem;
+  color: #4caf50;
+  margin-bottom: 5px;
+  animation: pop 0.5s ease;
+}
+
+.success-animation p {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

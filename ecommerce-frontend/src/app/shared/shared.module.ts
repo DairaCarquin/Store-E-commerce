@@ -16,16 +16,21 @@ import { MatIconModule } from '@angular/material/icon';
     CarouselComponent,
     ProductCardComponent,
     ProductCarouselComponent,
-    Base64ImagePipe,
+    Base64ImagePipe
   ],
-  imports: [CommonModule, RouterModule, MatIconModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatIconModule
+  ],
   exports: [
     HeaderComponent,
     FooterComponent,
     CarouselComponent,
     ProductCardComponent,
     ProductCarouselComponent,
-    Base64ImagePipe
+    Base64ImagePipe,
+    MatIconModule
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -6,7 +6,7 @@ public record ProductResponse(
         String description, 
         Double price, 
         Integer stock, 
-        String imageUrl,  
+        String imageBase64,  
         Long categoryId,  
         String category,
         Boolean active

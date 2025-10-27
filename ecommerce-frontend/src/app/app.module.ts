@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { MatIconModule } from '@angular/material/icon';
 import { CategoryListModule } from './modules/category-list/category-list.module';
+import { CartSidebarModule } from './modules/cart-sidebar/cart-sidebar.module';
+import { MenuSidebarModule } from './modules/menu-sidebar/menu-sidebar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +22,9 @@ import { CategoryListModule } from './modules/category-list/category-list.module
     SharedModule,
     AppRoutingModule,
     MatIconModule,
-    CategoryListModule
+    CategoryListModule,
+    CartSidebarModule,
+    MenuSidebarModule
   ],
   providers: [
     {

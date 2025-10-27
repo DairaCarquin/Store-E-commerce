@@ -1,0 +1,39 @@
+<div class="cart-sidebar" [class.open]="visible">
+    <div class="cart-header">
+        <h3>Tu carrito</h3>
+        <button class="close-btn" (click)="toggle()">✕</button>
+    </div>
+
+    <div *ngIf="cart?.items?.length; else emptyCart" class="cart-body">
+        <div *ngFor="let item of cart!.items" class="cart-item">
+            <img [src]="item.imageBase64 | base64Image" alt="{{ item.productName }}" />
+
+            <div class="info">
+                <div>
+                    <p class="name">{{ item.productName }}</p>
+                    <p class="desc">{{ item.description || 'Sin descripción' }}</p>
+                </div>
+
+                <div class="controls">
+                    <button (click)="remove(item.productId)">🗑️</button>
+                    <span>{{ item.quantity }}</span>
+                    <button (click)="update(item.productId, item.quantity + 1)">＋</button>
+                </div>
+
+                <p class="price">S/ {{ item.unitPrice | number: '1.2-2' }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="totals" *ngIf="cart">
+        <p>Subtotal: <strong>S/ {{ cart.subtotal | number: '1.2-2' }}</strong></p>
+        <p>Descuento: <strong>S/ {{ cart.discount | number: '1.2-2' }}</strong></p>
+        <p>Total: <strong>S/ {{ cart.total | number: '1.2-2' }}</strong></p>
+    </div>
+
+    <button class="checkout-btn" (click)="goToCheckout()">Ir a pagar</button>
+
+    <ng-template #emptyCart>
+        <p class="empty-msg">Tu carrito está vacío</p>
+    </ng-template>
+</div>

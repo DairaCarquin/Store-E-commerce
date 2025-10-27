@@ -156,7 +156,27 @@ public class ProductController {
                                 p.getPrice().doubleValue(),
                                 p.getStock(),
                                 p.getImageBase64(),
-                                p.getCategory() != null ? p.getCategory().getId() : null, 
+                                p.getCategory() != null ? p.getCategory().getId() : null,
+                                p.getCategory() != null ? p.getCategory().getName() : null,
+                                p.isActive())));
+    }
+
+    @GetMapping("/search")
+    public PageResponse<ProductResponse> searchProducts(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double price,
+            Pageable pageable) {
+
+        return PageResponse.from(
+                productService.search(name, price, pageable)
+                        .map(p -> new ProductResponse(
+                                p.getId(),
+                                p.getName(),
+                                p.getDescription(),
+                                p.getPrice().doubleValue(),
+                                p.getStock(),
+                                p.getImageBase64(),
+                                p.getCategory() != null ? p.getCategory().getId() : null,
                                 p.getCategory() != null ? p.getCategory().getName() : null,
                                 p.isActive())));
     }

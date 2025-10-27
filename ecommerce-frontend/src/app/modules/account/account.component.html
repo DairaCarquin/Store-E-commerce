@@ -1,0 +1,54 @@
+<div class="account-container">
+    <aside class="account-sidebar">
+        <div class="user-box">
+            <mat-icon class="avatar">account_circle</mat-icon>
+            <h3>{{ user?.fullName }}</h3>
+            <p>{{ user?.email }}</p>
+            <a class="logout" (click)="logout()">Cerrar sesión</a>
+        </div>
+
+        <nav class="menu">
+            <button [class.active]="selectedSection === 'orders'" (click)="selectSection('orders')">
+                <mat-icon>shopping_bag</mat-icon> Mis pedidos
+            </button>
+            <button [class.active]="selectedSection === 'address'" (click)="selectSection('address')">
+                <mat-icon>home</mat-icon> Editar dirección
+            </button>
+            <button [class.active]="selectedSection === 'cards'" (click)="selectSection('cards')">
+                <mat-icon>credit_card</mat-icon> Tarjetas guardadas
+            </button>
+            <button [class.active]="selectedSection === 'info'" (click)="selectSection('info')">
+                <mat-icon>person</mat-icon> Info de cuenta
+            </button>
+        </nav>
+    </aside>
+
+    <section class="account-content">
+        <h2 *ngIf="selectedSection === 'info'">Información de cuenta</h2>
+        <div *ngIf="selectedSection === 'info'" class="info-section">
+            <label>Nombre completo</label>
+            <input type="text" [(ngModel)]="user!.fullName" readonly />
+            <label>Correo electrónico</label>
+            <input type="text" [(ngModel)]="user!.email" readonly />
+            <label>Teléfono</label>
+            <input type="text" [(ngModel)]="user!.phone" readonly />
+            <label>DNI</label>
+            <input type="text" [(ngModel)]="user!.dni" readonly />
+        </div>
+
+        <div *ngIf="selectedSection === 'orders'" class="placeholder">
+            <mat-icon>shopping_bag</mat-icon>
+            <p>Aún no tienes pedidos.</p>
+        </div>
+
+        <div *ngIf="selectedSection === 'address'" class="placeholder">
+            <mat-icon>home</mat-icon>
+            <p>Aquí podrás editar tu dirección de envío.</p>
+        </div>
+
+        <div *ngIf="selectedSection === 'cards'" class="placeholder">
+            <mat-icon>credit_card</mat-icon>
+            <p>No tienes tarjetas guardadas.</p>
+        </div>
+    </section>
+</div>

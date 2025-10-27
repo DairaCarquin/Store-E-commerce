@@ -7,8 +7,9 @@ export interface Category {
     id: number;
     name: string;
     description: string;
-    imageUrl: string;
+    imageBase64: string;
     active: boolean;
+    products?: Product[];
 }
 
 export interface Product {
@@ -17,7 +18,7 @@ export interface Product {
     description: string;
     price: number;
     stock: number;
-    imageUrl: string;
+    imageBase64: string;
     categoryId: number;
     category: string;
     active: boolean;

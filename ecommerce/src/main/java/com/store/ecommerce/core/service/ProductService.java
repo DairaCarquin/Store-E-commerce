@@ -18,20 +18,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final ProductRepository productRepo;
+    private final ProductRepository productRepository;
     private final CategoryRepository categoryRepo;
 
     public Page<Product> list(Pageable pageable) {
-        return productRepo.findByActiveTrue(pageable);
+        return productRepository.findByActiveTrue(pageable);
     }
 
     public Product get(Long id) {
-        return productRepo.findById(id)
+        return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
 
     public Product save(Product product) {
-        return productRepo.save(product);
+        return productRepository.save(product);
     }
 
     public Product create(ProductRequest req) {
@@ -49,7 +49,7 @@ public class ProductService {
             p.setCategory(category);
         }
 
-        return productRepo.save(p);
+        return productRepository.save(p);
     }
 
     public Product update(Long id, ProductRequest req) {
@@ -67,21 +67,33 @@ public class ProductService {
             p.setCategory(c);
         }
 
-        return productRepo.save(p);
+        return productRepository.save(p);
     }
 
     public void delete(Long id) {
-        if (!productRepo.existsById(id)) {
+        if (!productRepository.existsById(id)) {
             throw new RuntimeException("Producto no encontrado");
         }
-        productRepo.deleteById(id);
+        productRepository.deleteById(id);
     }
 
     public Page<Product> listByCategory(Long categoryId, Pageable pageable) {
         if (!categoryRepo.existsById(categoryId)) {
             throw new RuntimeException("Categoría no encontrada");
         }
-        return productRepo.findByCategoryIdAndActiveTrue(categoryId, pageable);
+        return productRepository.findByCategoryIdAndActiveTrue(categoryId, pageable);
+    }
+
+    public Page<Product> search(String name, Double price, Pageable pageable) {
+        if (name != null && price != null) {
+            return productRepository.findByNameContainingIgnoreCaseOrPrice(name, BigDecimal.valueOf(price), pageable);
+        } else if (name != null) {
+            return productRepository.findByNameContainingIgnoreCase(name, pageable);
+        } else if (price != null) {
+            return productRepository.findByPrice(BigDecimal.valueOf(price), pageable);
+        } else {
+            return productRepository.findAll(pageable);
+        }
     }
 
 }

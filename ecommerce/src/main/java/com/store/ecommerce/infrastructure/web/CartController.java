@@ -32,7 +32,15 @@ public class CartController {
 
     @PostMapping("/{userId}/items")
     public CartResponse add(@PathVariable Long userId, @RequestBody AddItemRequest req) {
-        return mapToResponse(cartService.addItem(userId, req.productId(), req.quantity()));
+        return mapToResponse(
+                cartService.addItem(
+                        userId,
+                        req.productId(),
+                        req.quantity(),
+                        req.name(),
+                        req.price(),
+                        req.description(),
+                        req.imageBase64()));
     }
 
     @PutMapping("/{userId}/items/{productId}")
@@ -53,10 +61,18 @@ public class CartController {
 
     private CartResponse mapToResponse(Cart cart) {
         var items = cart.getItems().stream()
-                .map(ci -> new CartItemResponse(ci.getProduct().getId(), ci.getProduct().getName(),
-                        ci.getQuantity(), ci.getPriceSnapshot().doubleValue()))
+                .map(ci -> new CartItemResponse(
+                        ci.getProduct().getId(),
+                        ci.getName() != null ? ci.getName() : ci.getProduct().getName(),
+                        ci.getQuantity(),
+                        ci.getPriceSnapshot().doubleValue(),
+                        ci.getImageBase64(),
+                        ci.getDescription()))
                 .toList();
-        return new CartResponse(items, cart.getSubtotal().doubleValue(), cart.getDiscount().doubleValue(),
+
+        return new CartResponse(items, cart.getSubtotal().doubleValue(),
+                cart.getDiscount().doubleValue(),
                 cart.getTotal().doubleValue());
     }
+
 }

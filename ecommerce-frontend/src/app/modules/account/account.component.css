@@ -1,0 +1,123 @@
+.account-container {
+    display: flex;
+    min-height: 90vh;
+    background: #f8f9fb;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.account-sidebar {
+    width: 280px;
+    background: white;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    border-right: 1px solid #e0e0e0;
+}
+
+.user-box {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    font-size: 64px;
+    color: #8b44a8;
+}
+
+.user-box h3 {
+    margin: 8px 0 2px;
+    font-weight: 700;
+    color: #333;
+}
+
+.user-box p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.logout {
+    display: inline-block;
+    margin-top: 10px;
+    color: #d32f2f;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    color: #555;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.menu button:hover {
+    background: #f2f2f2;
+}
+
+.menu button.active {
+    background: #8b44a815;
+    color: #8b44a8;
+    font-weight: 600;
+}
+
+.account-content {
+    flex: 1;
+    padding: 40px 60px;
+}
+
+.account-content h2 {
+    color: #4a148c;
+    margin-bottom: 20px;
+}
+
+.info-section {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+}
+
+.info-section label {
+    display: block;
+    font-weight: 600;
+    margin-top: 10px;
+    color: #555;
+}
+
+.info-section input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+    margin-top: 5px;
+}
+
+.placeholder {
+    text-align: center;
+    color: #777;
+    margin-top: 50px;
+}
+
+.placeholder mat-icon {
+    font-size: 24px;
+    color: #b39ddb;
+    display: block;
+    margin: 0 auto 10px;
+}

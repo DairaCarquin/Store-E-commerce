@@ -10,7 +10,7 @@
 
 .product-card {
   width: 220px;
-  height: 320px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -37,24 +37,35 @@
 
 .product-card h3 {
   font-size: 0.95rem;
-  margin: 5px 0;
-  height: auto;
+  margin: 5px 10px;
+  height: 30px !important;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 500;
+  text-align: left;
 }
 
 .product-card p {
   font-size: 0.85rem;
-  margin: 0;
-  height: 40px;
+  margin: 5px 10px;
+  height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left;
+
 }
 
-.price {
+.product-card h4 {
   color: #78418f;
-  margin-top: 5px;
+  margin: 5px 0;
   font-weight: 700;
+  height: 20px !important;
+  text-align: center;
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  display: flex;
 }
 
 button {

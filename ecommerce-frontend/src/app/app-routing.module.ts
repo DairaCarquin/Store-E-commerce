@@ -8,24 +8,30 @@ const routes: Routes = [
             import('./modules/home/home.module').then((m) => m.HomeModule)
     },
     {
+        path: 'categories',
+        loadChildren: () =>
+            import('./modules/category-list/category-list.module').then((m) => m.CategoryListModule)
+    },
+    {
         path: 'login',
         loadChildren: () =>
             import('./modules/auth/auth.module').then((m) => m.AuthModule)
     },
     {
+        path: 'account',
+        loadChildren: () =>
+            import('./modules/account/account.module').then(m => m.AccountModule)
+    },
+    {
+        path: 'checkout',
+        loadChildren: () =>
+            import('./modules/checkout/checkout.module').then(m => m.CheckoutModule)
+    },
+
+    {
         path: 'products',
         loadChildren: () =>
             import('./modules/products/products.module').then((m) => m.ProductsModule)
-    },
-    {
-        path: 'cart',
-        loadChildren: () =>
-            import('./modules/cart/cart.module').then((m) => m.CartModule)
-    },
-    {
-        path: 'orders',
-        loadChildren: () =>
-            import('./modules/orders/orders.module').then((m) => m.OrdersModule)
     },
     {
         path: 'admin',

@@ -29,8 +29,17 @@ public class CartItem {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "image_base64", columnDefinition = "LONGTEXT")
+    private String imageBase64;
+
     @Column(nullable = false)
     private Integer quantity;
     @Column(nullable = false)
-    private BigDecimal priceSnapshot; // precio al momento
+    private BigDecimal priceSnapshot;
 }

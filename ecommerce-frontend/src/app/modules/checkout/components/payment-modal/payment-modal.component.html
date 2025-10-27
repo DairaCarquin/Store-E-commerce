@@ -1,0 +1,47 @@
+<div class="overlay" (click)="close()"></div>
+
+<div class="modal">
+    <button class="close-btn" style="
+    display: flex;
+    justify-content: end;
+" (click)="close()">✕</button>
+
+    <div class="modal-header">
+        <div class="icon" style="
+    font-size: 24px;
+">💳</div>
+        <h2>Pago con tarjeta</h2>
+    </div>
+
+    <form [formGroup]="cardForm" (ngSubmit)="pay()">
+        <label>Número de tarjeta</label>
+        <input formControlName="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19"
+            (input)="formatCardNumber($event)" [class.invalid]="isInvalid('cardNumber')" />
+
+        <div class="row">
+            <div class="col">
+                <label>Fecha expiración</label>
+                <input formControlName="expiry" placeholder="MM/AA" maxlength="5" (input)="formatExpiry($event)"
+                    [class.invalid]="isInvalid('expiry')" />
+            </div>
+            <div class="col">
+                <label>CVV</label>
+                <input formControlName="cvv" placeholder="123" maxlength="3" type="password"
+                    [class.invalid]="isInvalid('cvv')" />
+            </div>
+        </div>
+
+        <label>Nombre del titular</label>
+        <input formControlName="cardHolder" placeholder="Como aparece en la tarjeta"
+            [class.invalid]="isInvalid('cardHolder')" />
+
+        <button type="submit" [disabled]="cardForm.invalid || processing">
+            {{ processing ? 'Procesando...' : '💜 Pagar ahora' }}
+        </button>
+    </form>
+
+    <div *ngIf="successAnimation" class="success-animation">
+        <div class="checkmark">✔</div>
+        <p>Pago realizado exitosamente 🎉</p>
+    </div>
+</div>

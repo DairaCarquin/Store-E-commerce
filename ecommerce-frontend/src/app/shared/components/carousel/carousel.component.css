@@ -5,7 +5,6 @@
   height: 400px;
 }
 
-/* Slides base */
 .slide {
   display: none;
   position: absolute;
@@ -87,7 +86,6 @@
   transform: translateY(-2px);
 }
 
-/* ===== Flechas navegación ===== */
 .nav {
   position: absolute;
   top: 50%;
@@ -114,7 +112,6 @@
   right: 10px;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .overlay {
     padding-left: 30px;

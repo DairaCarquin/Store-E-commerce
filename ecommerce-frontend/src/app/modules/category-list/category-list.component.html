@@ -1,0 +1,66 @@
+<div *ngIf="selectedCategory as category" class="category-content">
+  <h2>{{ category.name }}</h2>
+
+  <div class="pagination-controls">
+    <div>
+      <label for="pageSize">Mostrar:</label>
+      <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        <option *ngFor="let size of [4, 8, 12]" [value]="size">{{ size }}</option>
+      </select>
+      <span>productos por página</span>
+    </div>
+
+    <div class="page-buttons">
+      <button (click)="prevPage()" [disabled]="page === 0">‹ Anterior</button>
+      <span>Página {{ page + 1 }} de {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="page + 1 >= totalPages">Siguiente ›</button>
+    </div>
+  </div>
+
+  <div class="product-grid">
+    <div class="filter-card">
+      <h3>Filtrar productos</h3>
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="searchQuery" (input)="validateNameInput($event)"
+        (ngModelChange)="onSearchChange($event)" placeholder="Buscar por nombre..." maxlength="40" />
+
+      <label>Rango de precios (S/):</label>
+      <div class="price-range">
+        <input type="number" [(ngModel)]="minPrice" (change)="applyPriceFilter()" placeholder="Mínimo" min="0" />
+        <span>—</span>
+        <input type="number" [(ngModel)]="maxPrice" (change)="applyPriceFilter()" placeholder="Máximo" min="0" />
+      </div>
+      <button (click)="clearFilters()">Limpiar filtros</button>
+    </div>
+
+    <div *ngFor="let p of filteredProducts; let i = index" class="product-card" [ngStyle]="getGridPosition(i)">
+      <img [src]="p.imageBase64 | base64Image" alt="{{ p.name }}" />
+      <h4>{{ p.name }}</h4>
+      <p class="price">S/ {{ p.price | number: '1.2-2' }}</p>
+
+      <ng-container *ngIf="authService.isAuthenticated(); else loginMsg">
+        <ng-container *ngIf="isInCart(p.id); else addBtn">
+          <div class="in-cart">
+            <button (click)="decreaseQty(p.id)" class="trash-btn">➖</button>
+            <span>{{ getCartQuantity(p.id) }}</span>
+            <button (click)="increaseQty(p.id)" class="plus-btn">➕</button>
+          </div>
+        </ng-container>
+
+        <ng-template #addBtn>
+          <button class="add-btn" (click)="addToCart(p.id)">Agregar</button>
+        </ng-template>
+      </ng-container>
+
+      <ng-template #loginMsg>
+        <button class="add-btn" (click)="handleAddClick(p.id)">
+          Inicia sesión para comprar
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!selectedCategory" class="empty-message">
+  <p>Selecciona una categoría para ver sus productos.</p>
+</div>

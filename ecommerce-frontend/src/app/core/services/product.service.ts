@@ -9,16 +9,25 @@ export interface Product {
   description: string;
   price: number;
   stock: number;
-  imageUrl: string;
+  imageBase64 : string;
   category: string;
+  categoryId?: number;
   active: boolean;
+}
+
+export interface PageResponse<T> {
+  content: T[];
+  totalPages: number;
+  totalElements: number;
+  number: number;
+  size: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private baseUrl = `${environment.apiUrl}/products`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(page: number = 0, size: number = 20): Observable<{ content: Product[] }> {
     return this.http.get<{ content: Product[] }>(`${this.baseUrl}?page=${page}&size=${size}`);
@@ -39,4 +48,21 @@ export class ProductService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  getByCategory(categoryId: number, page = 0, size = 12): Observable<PageResponse<Product>> {
+    return this.http.get<PageResponse<Product>>(`${this.baseUrl}/category/${categoryId}?page=${page}&size=${size}`);
+  }
+
+  getBySearch(query: string, page: number, size: number) {
+    const price = parseFloat(query);
+    const isPrice = !isNaN(price);
+
+    let url = `${this.baseUrl}/search?page=${page}&size=${size}`;
+    if (isPrice) url += `&price=${price}`;
+    else url += `&name=${encodeURIComponent(query)}`;
+
+    return this.http.get<PageResponse<Product>>(url);
+  }
+
+
 }

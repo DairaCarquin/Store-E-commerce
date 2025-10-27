@@ -1,5 +1,5 @@
 section {
-  padding: 40px 60px;
+  padding: 40px 60px 20px;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -88,7 +88,6 @@ app-product-carousel {
 }
 
 .benefits {
-  /* 🎨 Fondo con degradado moderno */
   background: linear-gradient(135deg, #007bbd, #8b6ad9, #ff7f50);
   background-size: 300% 300%;
   animation: gradientShift 12s ease infinite;
@@ -105,7 +104,6 @@ app-product-carousel {
   border-radius: 0;
 }
 
-/* Animación sutil del degradado */
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -120,13 +118,12 @@ app-product-carousel {
   }
 }
 
-/* Cada bloque de beneficio */
 .benefit {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 180px;
+  width: 200px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
@@ -139,21 +136,18 @@ app-product-carousel {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Íconos Material */
 .benefit mat-icon {
   font-size: 24px;
   color: #fff;
   margin-bottom: 10px;
 }
 
-/* Texto del beneficio */
 .benefit span {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.4;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .benefit {
     width: 45%;
@@ -166,7 +160,6 @@ app-product-carousel {
   }
 }
 
-/* ===== SECCIÓN NEWSLETTER ===== */
 .newsletter {
   position: relative;
   background: url('../../../assets/home/newsletter.jpg') center/cover no-repeat;
@@ -201,7 +194,6 @@ app-product-carousel {
   letter-spacing: 0.5px;
 }
 
-/* ===== INPUT Y BOTÓN ===== */
 .input-row {
   display: flex;
   justify-content: center;
@@ -230,7 +222,6 @@ app-product-carousel {
   box-shadow: 0 0 0 2px #fff, 0 0 8px rgba(0, 123, 189, 0.7);
 }
 
-/* ===== BOTÓN ===== */
 .input-row button {
   background: linear-gradient(90deg, #009fe3, #8b6ad9);
   border: none;
@@ -247,7 +238,6 @@ app-product-carousel {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== RESPONSIVO ===== */
 @media (max-width: 768px) {
   .newsletter {
     padding: 80px 15px;
